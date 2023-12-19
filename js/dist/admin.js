@@ -32,6 +32,10 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('mbl/sp
     label: 'Discussion Banner Display',
     type: 'checkbox'
   }).registerSetting({
+    setting: 'mbl-sponsor-banners.title-text',
+    label: 'Title Text',
+    type: 'text'
+  }).registerSetting({
     setting: 'mbl-sponsor-banners.banner-side-image',
     label: 'Banner Side Image',
     type: 'text'

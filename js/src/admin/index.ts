@@ -25,6 +25,11 @@ app.initializers.add('mbl/sponsor-banners', () => {
       type: 'checkbox'
     })
     .registerSetting({
+      setting: 'mbl-sponsor-banners.title-text',
+      label: 'Title Text',
+      type: 'text'
+    })
+    .registerSetting({
       setting: 'mbl-sponsor-banners.banner-side-image',
       label: 'Banner Side Image',
       type: 'text'

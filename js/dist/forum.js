@@ -52,6 +52,7 @@ var BannerMobile = /*#__PURE__*/function (_Component) {
     this.adImage = "/assets/" + flarum_forum_app__WEBPACK_IMPORTED_MODULE_1___default().forum.attribute('mbl-sponsor-banners.image-mobile');
     this.bannerLink = vnode.attrs.bannerLink;
     this.bannerTag = vnode.attrs.bannerPlausibleTag;
+    this.titleText = vnode.attrs.titleText;
   };
   _proto.oncreate = function oncreate(vnode) {
     _Component.prototype.oncreate.call(this, vnode);
@@ -65,7 +66,7 @@ var BannerMobile = /*#__PURE__*/function (_Component) {
       className: "BannerMobile-container"
     }, m("h4", {
       className: "BannerSide-title"
-    }, "Sponsor"), m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
+    }, this.titleText), m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
       href: this.bannerLink,
       target: "_blank",
       className: this.bannerTag
@@ -112,6 +113,7 @@ var BannerSide = /*#__PURE__*/function (_Component) {
     this.adImage = "/assets/" + flarum_forum_app__WEBPACK_IMPORTED_MODULE_1___default().forum.attribute('mbl-sponsor-banners.image-side');
     this.bannerLink = vnode.attrs.bannerLink;
     this.bannerTag = vnode.attrs.bannerPlausibleTag;
+    this.titleText = vnode.attrs.titleText;
   };
   _proto.oncreate = function oncreate(vnode) {
     _Component.prototype.oncreate.call(this, vnode);
@@ -125,7 +127,7 @@ var BannerSide = /*#__PURE__*/function (_Component) {
       className: "BannerSide-container"
     }, m("h4", {
       className: "BannerSide-title"
-    }, "Sponsor"), m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
+    }, this.titleText), m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
       href: this.bannerLink,
       target: "_blank",
       className: this.bannerTag
@@ -171,19 +173,22 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('mbl/sp
     var bannersLink = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banners-link');
     var bannerLandingTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banner-landing-tag');
     var bannerMobileTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banner-mobile-tag');
+    var titleText = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.title-text');
     var sideIsDisplaying = parseInt(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.side-is-displaying'));
     var mobileIsDisplaying = parseInt(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.mobile-is-displaying'));
     if (isValidForPromotion) {
       if (sideIsDisplaying) {
         items.add('mbl-sponsor-banner-side', m(_components_BannerSide__WEBPACK_IMPORTED_MODULE_2__["default"], {
           bannerPlausibleTag: bannerLandingTag,
-          bannerLink: bannersLink
+          bannerLink: bannersLink,
+          titleText: titleText
         }));
       }
       if (mobileIsDisplaying) {
         items.add('mbl-sponsor-banner-mobile', m(_components_BannerMobile__WEBPACK_IMPORTED_MODULE_3__["default"], {
           bannerPlausibleTag: bannerMobileTag,
-          bannerLink: bannersLink
+          bannerLink: bannersLink,
+          titleText: titleText
         }));
       }
     }
@@ -193,10 +198,12 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('mbl/sp
     var bannersLink = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banners-link');
     var bannerDiscussionTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banner-discussion-tag');
     var discussionIsDisplaying = parseInt(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.discussion-is-displaying'));
+    var titleText = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.title-text');
     if (isValidForPromotion && discussionIsDisplaying) {
       items.add('mbl-sponsor-banner-discussion', m(_components_BannerSide__WEBPACK_IMPORTED_MODULE_2__["default"], {
         bannerPlausibleTag: bannerDiscussionTag,
-        bannerLink: bannersLink
+        bannerLink: bannersLink,
+        titleText: titleText
       }), -100);
     }
   });

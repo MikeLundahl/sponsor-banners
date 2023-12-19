@@ -8,6 +8,7 @@ export default class BannerSide extends Component {
     this.adImage = `/assets/${app.forum.attribute('mbl-sponsor-banners.image-side')}`
     this.bannerLink = vnode.attrs.bannerLink;
     this.bannerTag = vnode.attrs.bannerPlausibleTag;
+    this.titleText = vnode.attrs.titleText;
   }
 
   oncreate(vnode) {
@@ -22,7 +23,7 @@ export default class BannerSide extends Component {
   view() {
     return (
       <div className="BannerSide-container">
-        <h4 className="BannerSide-title">Sponsor</h4>
+        <h4 className="BannerSide-title">{this.titleText}</h4>
         <Link href={this.bannerLink} target="_blank" className={this.bannerTag}>
           <div className="BannerSide">
           </div>

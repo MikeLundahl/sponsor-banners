@@ -27,6 +27,7 @@ return [
         ->serializeToForum('mbl-sponsor-banners.is-displaying', 'mbl-sponsor-banners.is-displaying')
 
         ->serializeToForum('mbl-sponsor-banners.banners-link', 'mbl-sponsor-banners.banners-link')
+        ->serializeToForum('mbl-sponsor-banners.title-text', 'mbl-sponsor-banners.title-text')
 
         ->serializeToForum('mbl-sponsor-banners.side-is-displaying', 'mbl-sponsor-banners.side-is-displaying')
         ->serializeToForum('mbl-sponsor-banners.mobile-is-displaying', 'mbl-sponsor-banners.mobile-is-displaying')
