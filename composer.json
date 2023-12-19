@@ -26,9 +26,9 @@
             "title": "MBL Sponsor Banners",
             "category": "",
             "icon": {
-                "name": "",
-                "color": "",
-                "backgroundColor": ""
+                "name": "fas fa-images",
+                "color": "#ffffff",
+                "backgroundColor": "#000000"
             }
         },
         "flarum-cli": {
