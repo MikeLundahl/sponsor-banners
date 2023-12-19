@@ -20,6 +20,18 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('mbl/sp
     label: 'Display',
     type: 'checkbox'
   }).registerSetting({
+    setting: 'mbl-sponsor-banners.side-is-displaying',
+    label: 'Side Banner Display',
+    type: 'checkbox'
+  }).registerSetting({
+    setting: 'mbl-sponsor-banners.mobile-is-displaying',
+    label: 'Mobile Banner Display',
+    type: 'checkbox'
+  }).registerSetting({
+    setting: 'mbl-sponsor-banners.discussion-is-displaying',
+    label: 'Discussion Banner Display',
+    type: 'checkbox'
+  }).registerSetting({
     setting: 'mbl-sponsor-banners.banner-side-image',
     label: 'Banner Side Image',
     type: 'text'
@@ -28,8 +40,8 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('mbl/sp
     label: 'Banner Mobile Image',
     type: 'text'
   }).registerSetting({
-    setting: 'mbl-sponsor-banners.banner-side-link',
-    label: 'Banner Side Link',
+    setting: 'mbl-sponsor-banners.banners-link',
+    label: 'Banners Link',
     type: 'text'
   }).registerSetting({
     setting: 'mbl-sponsor-banners.banner-landing-tag',

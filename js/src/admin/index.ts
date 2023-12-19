@@ -10,6 +10,21 @@ app.initializers.add('mbl/sponsor-banners', () => {
       type: 'checkbox'
     })
     .registerSetting({
+      setting: 'mbl-sponsor-banners.side-is-displaying',
+      label: 'Side Banner Display',
+      type: 'checkbox'
+    })
+    .registerSetting({
+      setting: 'mbl-sponsor-banners.mobile-is-displaying',
+      label: 'Mobile Banner Display',
+      type: 'checkbox'
+    })
+    .registerSetting({
+      setting: 'mbl-sponsor-banners.discussion-is-displaying',
+      label: 'Discussion Banner Display',
+      type: 'checkbox'
+    })
+    .registerSetting({
       setting: 'mbl-sponsor-banners.banner-side-image',
       label: 'Banner Side Image',
       type: 'text'
@@ -20,8 +35,8 @@ app.initializers.add('mbl/sponsor-banners', () => {
       type: 'text'
     })
     .registerSetting({
-      setting: 'mbl-sponsor-banners.banner-side-link',
-      label: 'Banner Side Link',
+      setting: 'mbl-sponsor-banners.banners-link',
+      label: 'Banners Link',
       type: 'text'
     })
     .registerSetting({

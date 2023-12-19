@@ -49,7 +49,8 @@ var BannerMobile = /*#__PURE__*/function (_Component) {
   var _proto = BannerMobile.prototype;
   _proto.oninit = function oninit(vnode) {
     _Component.prototype.oninit.call(this, vnode);
-    this.adImage = "/assets/" + flarum_forum_app__WEBPACK_IMPORTED_MODULE_1___default().forum.attribute('image-mobile');
+    this.adImage = "/assets/" + flarum_forum_app__WEBPACK_IMPORTED_MODULE_1___default().forum.attribute('mbl-sponsor-banners.image-mobile');
+    this.bannerLink = vnode.attrs.bannerLink;
     this.bannerTag = vnode.attrs.bannerPlausibleTag;
   };
   _proto.oncreate = function oncreate(vnode) {
@@ -65,7 +66,7 @@ var BannerMobile = /*#__PURE__*/function (_Component) {
     }, m("h4", {
       className: "BannerSide-title"
     }, "Sponsor"), m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
-      href: "https://www.google.com",
+      href: this.bannerLink,
       target: "_blank",
       className: this.bannerTag
     }, m("div", {
@@ -108,7 +109,8 @@ var BannerSide = /*#__PURE__*/function (_Component) {
   var _proto = BannerSide.prototype;
   _proto.oninit = function oninit(vnode) {
     _Component.prototype.oninit.call(this, vnode);
-    this.adImage = "/assets/" + flarum_forum_app__WEBPACK_IMPORTED_MODULE_1___default().forum.attribute('image-side');
+    this.adImage = "/assets/" + flarum_forum_app__WEBPACK_IMPORTED_MODULE_1___default().forum.attribute('mbl-sponsor-banners.image-side');
+    this.bannerLink = vnode.attrs.bannerLink;
     this.bannerTag = vnode.attrs.bannerPlausibleTag;
   };
   _proto.oncreate = function oncreate(vnode) {
@@ -124,7 +126,7 @@ var BannerSide = /*#__PURE__*/function (_Component) {
     }, m("h4", {
       className: "BannerSide-title"
     }, "Sponsor"), m((flarum_common_components_Link__WEBPACK_IMPORTED_MODULE_3___default()), {
-      href: "https://www.google.com",
+      href: this.bannerLink,
       target: "_blank",
       className: this.bannerTag
     }, m("div", {
@@ -166,25 +168,35 @@ __webpack_require__.r(__webpack_exports__);
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('mbl/sponsor-banners', function () {
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_4___default().prototype), 'sidebarItems', function (items) {
     var isValidForPromotion = (0,_utils_validatePromotion__WEBPACK_IMPORTED_MODULE_6__["default"])();
-    var bannerLandingTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('banner-landing-tag');
-    var bannerMobileTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('banner-mobile-tag');
-
-    //TODO: add plausible tags
+    var bannersLink = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banners-link');
+    var bannerLandingTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banner-landing-tag');
+    var bannerMobileTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banner-mobile-tag');
+    var sideIsDisplaying = parseInt(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.side-is-displaying'));
+    var mobileIsDisplaying = parseInt(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.mobile-is-displaying'));
     if (isValidForPromotion) {
-      items.add('mbl-sponsor-banner-side', m(_components_BannerSide__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        bannerPlausibleTag: bannerLandingTag
-      }));
-      items.add('mbl-sponsor-banner-mobile', m(_components_BannerMobile__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        bannerPlausibleTag: bannerMobileTag
-      }));
+      if (sideIsDisplaying) {
+        items.add('mbl-sponsor-banner-side', m(_components_BannerSide__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          bannerPlausibleTag: bannerLandingTag,
+          bannerLink: bannersLink
+        }));
+      }
+      if (mobileIsDisplaying) {
+        items.add('mbl-sponsor-banner-mobile', m(_components_BannerMobile__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          bannerPlausibleTag: bannerMobileTag,
+          bannerLink: bannersLink
+        }));
+      }
     }
   });
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_forum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_5___default().prototype), 'sidebarItems', function (items) {
     var isValidForPromotion = (0,_utils_validatePromotion__WEBPACK_IMPORTED_MODULE_6__["default"])();
-    var bannerDiscussionTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('banner-discussion-tag');
-    if (isValidForPromotion) {
+    var bannersLink = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banners-link');
+    var bannerDiscussionTag = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.banner-discussion-tag');
+    var discussionIsDisplaying = parseInt(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.discussion-is-displaying'));
+    if (isValidForPromotion && discussionIsDisplaying) {
       items.add('mbl-sponsor-banner-discussion', m(_components_BannerSide__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        bannerPlausibleTag: bannerDiscussionTag
+        bannerPlausibleTag: bannerDiscussionTag,
+        bannerLink: bannersLink
       }), -100);
     }
   });
@@ -229,11 +241,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function validatePromotion() {
-  var isDisplaying = parseInt(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('is-displaying'));
-  var startDate = new Date(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('start-date'));
-  var endDate = new Date(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('end-date'));
+  var startDate = new Date(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.start-date'));
+  var endDate = new Date(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('mbl-sponsor-banners.end-date'));
   var isDateValid = (0,_checkDate__WEBPACK_IMPORTED_MODULE_1__["default"])(startDate, endDate);
-  return isDisplaying > 0 && isDateValid;
+  return isDateValid;
 }
 
 /***/ }),

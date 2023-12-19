@@ -5,7 +5,8 @@ import Link from 'flarum/common/components/Link';
 export default class BannerMobile extends Component {
   oninit(vnode) {
     super.oninit(vnode);
-    this.adImage = `/assets/${app.forum.attribute('image-mobile')}`
+    this.adImage = `/assets/${app.forum.attribute('mbl-sponsor-banners.image-mobile')}`
+    this.bannerLink = vnode.attrs.bannerLink;
     this.bannerTag = vnode.attrs.bannerPlausibleTag;
   }
 
@@ -22,7 +23,7 @@ export default class BannerMobile extends Component {
     return (
       <div className="BannerMobile-container">
         <h4 className="BannerSide-title">Sponsor</h4>
-        <Link href="https://www.google.com" target="_blank" className={this.bannerTag}>
+        <Link href={this.bannerLink} target="_blank" className={this.bannerTag}>
           <div className="BannerMobile">
           </div>
         </Link>

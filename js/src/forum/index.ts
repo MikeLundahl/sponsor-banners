@@ -9,22 +9,31 @@ import validatePromotion from "../utils/validatePromotion";
 app.initializers.add('mbl/sponsor-banners', () => {
     extend(IndexPage.prototype, 'sidebarItems', (items) => {
       const isValidForPromotion = validatePromotion()
-      const bannerLandingTag = app.forum.attribute('banner-landing-tag')
-      const bannerMobileTag = app.forum.attribute('banner-mobile-tag')
+      const bannersLink = app.forum.attribute('mbl-sponsor-banners.banners-link')
+      const bannerLandingTag = app.forum.attribute('mbl-sponsor-banners.banner-landing-tag')
+      const bannerMobileTag = app.forum.attribute('mbl-sponsor-banners.banner-mobile-tag')
 
-      //TODO: add plausible tags
+      const sideIsDisplaying = parseInt(app.forum.attribute('mbl-sponsor-banners.side-is-displaying'))
+      const mobileIsDisplaying = parseInt(app.forum.attribute('mbl-sponsor-banners.mobile-is-displaying'))
+
       if( isValidForPromotion ) {
-        items.add('mbl-sponsor-banner-side', m(BannerSide, { bannerPlausibleTag: bannerLandingTag }));
-        items.add('mbl-sponsor-banner-mobile', m(BannerMobile, { bannerPlausibleTag: bannerMobileTag }));
+        if ( sideIsDisplaying ) {
+          items.add('mbl-sponsor-banner-side', m(BannerSide, { bannerPlausibleTag: bannerLandingTag, bannerLink: bannersLink }));
+        }
+        if ( mobileIsDisplaying ) {
+          items.add('mbl-sponsor-banner-mobile', m(BannerMobile, { bannerPlausibleTag: bannerMobileTag, bannerLink: bannersLink }));
+        }
       }
     });
 
     extend(DiscussionPage.prototype, 'sidebarItems', (items) => {
       const isValidForPromotion = validatePromotion()
-      const bannerDiscussionTag = app.forum.attribute('banner-discussion-tag')
+      const bannersLink = app.forum.attribute('mbl-sponsor-banners.banners-link')
+      const bannerDiscussionTag = app.forum.attribute('mbl-sponsor-banners.banner-discussion-tag')
+      const discussionIsDisplaying = parseInt(app.forum.attribute('mbl-sponsor-banners.discussion-is-displaying'))
 
-      if ( isValidForPromotion ) {
-        items.add('mbl-sponsor-banner-discussion', m(BannerSide, { bannerPlausibleTag: bannerDiscussionTag }), -100);
+      if ( isValidForPromotion && discussionIsDisplaying) {
+        items.add('mbl-sponsor-banner-discussion', m(BannerSide, { bannerPlausibleTag: bannerDiscussionTag, bannerLink: bannersLink }), -100);
       }
 
     });
